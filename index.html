@@ -3,7 +3,7 @@
   <meta charset="utf-8">
   <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
   <link rel="stylesheet" type="text/css" href="css/index.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script><style>@media print {#ghostery-purple-box {display:none !important}}</style>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
   <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
@@ -91,6 +91,7 @@
   }
  $(document).ready(function() {
    var order = {};
+   var orderToSend = {};
    var totalCost = 0;
     $.getJSON("data/items.json", function(data) {
         $.each(data, function(key, val) {
@@ -157,10 +158,16 @@
    $('#confirmOrder').click(function(){
      console.log("submitted order");
       console.log(JSON.stringify(order));
-      var orderString = JSON.stringify(order);
-      var name = document.getElementById('nameInput').value;
-     console.log(orderString + "    " +name);
-     $.post("code/write.php", {pName: name, pOrder: orderString}, function(data){
+
+      
+      var namexz = document.getElementById('nameInput').value;
+      console.log(namexz + "herro");
+      orderToSend[namexz] = order;
+      
+      order["paid"] = 0;
+      order["cost"] = totalCost;
+
+     $.post("code/write.php", {pName : namexz, pOrder: order}, function(data){
        console.log(data);
      }); 
    });

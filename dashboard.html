@@ -1,0 +1,58 @@
+<html class="gr__ics-won0408_github_io"><head>
+  <title>Meat Order</title>
+  <meta charset="utf-8">
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" href="css/dashboard.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+  <link rel="icon" href="favicon.ico" type="image/x-icon">
+</head>
+
+ <body data-gr-c-s-loaded="true"><div class="container">
+      <div class="header clearfix">
+        <h3 class="text-muted">Meat Orders</h3>
+   </div>
+</div>
+    <button type="button" class="btn btn-primary" id="orderSubmit" onClick="saveChanges()">Save Changes</button>
+<div class="container" id = "orderContainer">
+     <table id = "orders" class = "table table-bordered">
+       <thead>
+         <tr>
+           <th>Name</th>
+           <th>Items</th>
+           <th>Cost</th>
+           <th>Paid</th>
+         </tr>
+       </thead>
+       <tbody>
+         
+       </tbody>
+       
+     </table>
+</div>
+
+    <script>
+        function saveChanges(){
+            console.log("hello world");
+        }
+        $.getJSON("code/orders.json",function(data){
+            $.each(data,function(key,val){
+                var stringToAdd = "<tr><td class = \"name\">";
+                var name = key;
+                stringToAdd += (name + "</td><td class = \"orders\">");
+                $.each(val,function(skey,sdata){
+                    console.log(skey);
+                    console.log(sdata);
+                    if(skey != "cost" && skey !="paid"){
+                        stringToAdd += ("<p>"+sKey+" :" + sdata+"</p>");
+                    }
+                    else if(skey == "cost" && sdata == 1){
+                        
+                    }
+                })
+            });
+        });
+    </script>
+</body>
