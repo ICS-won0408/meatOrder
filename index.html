@@ -1,0 +1,178 @@
+<html class="gr__ics-won0408_github_io"><head>
+  <title>Meat Order</title>
+  <meta charset="utf-8">
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" href="css/index.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script><style>@media print {#ghostery-purple-box {display:none !important}}</style>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+  <link rel="icon" href="favicon.ico" type="image/x-icon">
+</head>
+
+ <body data-gr-c-s-loaded="true"><div class="container">
+      <div class="header clearfix">
+        <h3 class="text-muted">Meat Orders</h3>
+   </div>
+</div>
+  <div class = "container" id = "nameContainer">
+  <form>
+    <div class="form-group row" id="nameForm">
+      
+      <div class="col-sm-10">
+        <input type="text" class="form-control form-control-lg" id="nameInput" placeholder="Name:">
+      </div>
+      
+    </div>
+    <button type="button" class="btn btn-primary" id="nameSubmit" onClick="nameInputted()">Next</button>
+   <script>
+    function nameInputted(){
+    var name = document.getElementById('nameInput').value;
+     if(name!= ''){
+      document.getElementById('nameSubmit').style.display='none';
+      document.getElementById('nameInput').style.display='none';
+      console.log(name);
+      document.getElementById('meat').style.display='block';
+       document.getElementById('cost').style.position='fixed';
+       document.getElementById('cost').style.display='inline';
+     }
+      else{
+        alert("Please enter a name");
+      }
+      
+  }
+    </script>
+  </form>
+</div>
+   <div class="container" id = "meats">
+     <table id = "meat" class = "table table-bordered" style="display:none">
+       <thead>
+         <tr>
+           <th>Item</th>
+           <th>Cost</th>
+           <th>Number</th>
+         </tr>
+       </thead>
+       <tbody>
+         
+       </tbody>
+       
+     </table>
+   </div>
+   <div id = "cost" class = "panel panel-default" style="display:none">
+     <div class="panel-heading">Cost</div>
+     <div class="panel-body">0</div>
+     <div class="panel-footer">
+       <button type="button" class="btn btn-primary" id ="submitOrder">Submit Order</button>
+     </div>
+   </div>
+   
+   <div class = "container" id = "confirmationPage">
+     
+   </div>
+     
+  </body>
+  <script>
+    
+    function nameInputted(){
+    var name = document.getElementById('nameInput').value;
+     if(name!= ''){
+      document.getElementById('nameSubmit').style.display='none';
+      document.getElementById('nameInput').style.display='none';
+      console.log(name);
+      document.getElementById('meat').style.display='block';
+       document.getElementById('cost').style.position='fixed';
+       document.getElementById('cost').style.display='inline';
+     }
+      else{
+        alert("Please enter a name");
+      }
+      
+  }
+ $(document).ready(function() {
+   var order = {};
+   var totalCost = 0;
+    $.getJSON("data/items.json", function(data) {
+        $.each(data, function(key, val) {
+            $('#meat > tbody').append("<tr><td class = \"meatOrder\">" + key + "</td><td class = \"costMeat\">" + val +
+                "</td><td class = \"number\"><input type=\"number\" value=\"0\" min = \"0\" id = \"numOrder\" step=\"1\"></td></tr>");
+          
+        });
+    });
+    $('#meat').on("input", "input#numOrder", function(){
+                     
+                     
+                     totalCost = 0;
+    
+     
+        $('#meat tbody tr').each(function(index){
+          var cost = $(this).find(".costMeat").text();
+          cost = cost.replace('$','');
+          var numberOfMeat = $(this).find('#numOrder').val();
+          var costToAdd = cost*numberOfMeat;
+          if(numberOfMeat.toString().includes('.'))
+             {
+             $(this).find('#numOrder').val('0');
+               alert("No decimals please");
+        }
+          totalCost += costToAdd;
+          });
+      console.log(totalCost+"fin");
+      $('.panel-body').text(totalCost.toFixed(2));
+      
+    });
+   
+   $(document).keypress(function(e){
+     if(e.which==13){
+        if($('#cost').css('display') == "none")
+        {
+           console.log("hello");
+          nameInputted();
+        }
+     
+     }
+   });
+   $(function() {
+    $("form").submit(function() { return false; });
+});
+   $("#submitOrder").click(function(){
+    
+     $("#meats").css("display","none");
+     $("#cost").css("display","none");
+     $("#nameContainer").css("display","none");
+     console.log("quoi");
+     $('#meat tbody tr').each(function(index){
+       var numberOfOrders = $(this).find('#numOrder').val();
+       var meat = $(this).find('.meatOrder').text();
+       if(numberOfOrders > 0){
+          $('#confirmationPage').append("<p>" + meat + " :"  + numberOfOrders +"</p>")
+          order[meat] = numberOfOrders;
+         console.log(order);
+       }
+      
+         
+     });
+   $('#confirmationPage').append("<h1>$" + totalCost.toFixed(2) + "</h1>")
+   $('#confirmationPage').append("<button id = \"confirmOrder\" type = \"button\" class=\"btn btn-primary\">Submit Order</button>")
+   $('#confirmOrder').click(function(){
+     console.log("submitted order");
+      console.log(JSON.stringify(order));
+      var orderString = JSON.stringify(order);
+      var name = document.getElementById('nameInput').value;
+     console.log(orderString + "    " +name);
+     $.post("code/write.php", {pName: name, pOrder: orderString}, function(data){
+       console.log(data);
+     }); 
+   });
+   
+     
+   });
+   
+   
+                      
+});
+    
+    
+  
+ </script>
+</html>
