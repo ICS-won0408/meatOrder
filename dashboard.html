@@ -41,8 +41,8 @@
             $.getJSON("code/orders.json",function(data){
                 $.each(data,function(key,val){
                     var stringToAdd = "<tr><td class = \"name\">";
-                    var name = key;
-                    stringToAdd += (name + "</td><td class = \"orders\">");
+                    
+                    stringToAdd += (key + "</td><td class = \"orders\">");
                     $.each(val,function(skey,sdata){
                         console.log(skey);
                         console.log(sdata);
@@ -61,6 +61,7 @@
                         }
 
                     });
+                    stringToAdd+=("</tr>");
                     $('#orders>tbody').append(stringToAdd);
                 });
             });
