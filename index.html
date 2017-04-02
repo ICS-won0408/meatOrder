@@ -99,7 +99,8 @@
    var order = {};
    var orderToSend = {};
    var totalCost = 0;
-    $.getJSON("data/items.json", function(data) {
+   var random = parseInt(Math.random()*10000000);
+    $.getJSON("data/items.json?"+random, function(data) {
         $.each(data, function(key, val) {
             $('#meat > tbody').append("<tr><td class = \"meatOrder\">" + key + "</td><td class = \"costMeat\">" + val +
                 "</td><td class = \"number\"><input type=\"number\" value=\"0\" min = \"0\" id = \"numOrder\" step=\"1\"></td></tr>");

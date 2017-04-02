@@ -52,7 +52,8 @@
         }
         $(document).ready(function(){
             var nameOrder = [];
-            $.getJSON("data/orders.json",function(data){
+            var random = parseInt(Math.random()*10000000);
+            $.getJSON("data/orders.json?"+random,function(data){
                 $.each(data,function(key,val){
                     var stringToAdd = "<tr><td class = \"name\">";
                     

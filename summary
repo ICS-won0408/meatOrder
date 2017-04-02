@@ -33,7 +33,8 @@
      $(document).ready(function(){
             var orders = {};
             var totalOrder = "";
-            $.getJSON("data/orders.json",function(data){
+            var random = parseInt(Math.random()*10000000);
+            $.getJSON("data/orders.json?" + random,function(data){
                 $.each(data,function(key,val){
                     $.each(val,function(skey,sdata){
                         if(orders[skey] == null){
