@@ -12,8 +12,14 @@
 
  <body data-gr-c-s-loaded="true"><div class="container">
       <div class="header clearfix">
-        <h3 class="text-muted">Meat Orders</h3>
-   </div>
+        <nav>
+          <ul class="nav nav-pills pull-right">
+            <li role="presentation" class="active"><a href="index.html">Order</a></li>
+            <li role="presentation"><a href="orderhistory">Order History</a></li>
+          </ul>
+        </nav>
+        <h3 class="text-muted">Project name</h3>
+      </div>
 </div>
   <div class = "container" id = "nameContainer">
   <form>
@@ -170,6 +176,7 @@
      $.post("code/write.php", {pName : namexz, pOrder: order}, function(data){
        console.log(data);
      }); 
+     window.location="orderhistory";
    });
    
      

@@ -3,6 +3,8 @@
   <meta charset="utf-8">
   <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
   <link rel="stylesheet" type="text/css" href="css/dashboard.css">
+  <META HTTP-EQUIV="Pragma" CONTENT="no-cache"> 
+  <META HTTP-EQUIV="Expires" CONTENT="-1">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
@@ -10,10 +12,17 @@
   <link rel="icon" href="favicon.ico" type="image/x-icon">
 </head>
 
- <body data-gr-c-s-loaded="true"><div class="container">
+ <body data-gr-c-s-loaded="true">
+<div class="container">
       <div class="header clearfix">
-        <h3 class="text-muted">Meat Orders</h3>
-   </div>
+        <nav>
+          <ul class="nav nav-pills pull-right">
+            <li role="presentation" class = "active"><a href="index.html">dashboard</a></li>
+            <li role="presentation"><a href="summary">Summary</a></li>
+          </ul>
+        </nav>
+        <h3 class="text-muted">Meat order</h3>
+      </div>
 </div>
     <button type="button" class="btn btn-primary" id="orderSubmit">Save Changes</button>
 <div class="container" id = "orderContainer">

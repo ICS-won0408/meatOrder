@@ -2,3 +2,7 @@ button#orderSubmit{
   position:fixed;
   right:1%;
 }
+
+.nav{
+  padding-top:10;
+}

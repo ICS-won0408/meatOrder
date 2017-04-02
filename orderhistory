@@ -1,0 +1,86 @@
+<html class="gr__ics-won0408_github_io"><head>
+  <title>Meat Order</title>
+  <meta charset="utf-8">
+  <META HTTP-EQUIV="Pragma" CONTENT="no-cache"> 
+  <META HTTP-EQUIV="Expires" CONTENT="-1">
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" href="css/dashboard.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+  <link rel="icon" href="favicon.ico" type="image/x-icon">
+
+  <script>
+      applicationCache.swapCache();
+      
+  </script>
+</head>
+
+ <body data-gr-c-s-loaded="true"><div class="container">
+      <div class="header clearfix">
+        <nav>
+          <ul class="nav nav-pills pull-right">
+            <li role="presentation"><a href="index.html">Order</a></li>
+            <li role="presentation" class = "active"><a href="orderhistory">Order History</a></li>
+          </ul>
+        </nav>
+        <h3 class="text-muted">Meat order</h3>
+      </div>
+</div>
+    
+<div class="container" id = "orderContainer">
+     <table id = "orders" class = "table table-bordered">
+       <thead>
+         <tr>
+           <th>Name</th>
+           <th>Items</th>
+           <th>Cost</th>
+           <th>Paid</th>
+         </tr>
+       </thead>
+       <tbody>
+         
+       </tbody>
+       
+     </table>
+</div>
+
+    <script>
+        function saveChanges(){
+            console.log("hello world");
+        }
+        $(document).ready(function(){
+            var nameOrder = [];
+            $.getJSON("data/orders.json",function(data){
+                $.each(data,function(key,val){
+                    var stringToAdd = "<tr><td class = \"name\">";
+                    
+                    stringToAdd += (key + "</td><td class = \"orders\">");
+                    $.each(val,function(skey,sdata){
+                        console.log(skey);
+                        console.log(sdata);
+                        if(skey != "cost" && skey !="paid"){
+                            stringToAdd += ("<p>"+skey+" : " + sdata+"</p>");
+                        }
+                        else if(skey == "cost"){
+                            stringToAdd +=("</td><td class = \"cost\"><p>$" + sdata + 
+                            "</td>")
+                        }
+                        else if(skey == "paid" && sdata == 1){
+                            stringToAdd+=("<td class = \"paid\"><p>Paid</p></td>");
+                        }
+                        else if(skey == "paid" && sdata == 0){
+                            stringToAdd+=("<td class = \"paid\"><p>Has Not Paid</p></td>");
+                        }
+
+                    });
+                    stringToAdd+=("</tr>");
+                    $('#orders>tbody').append(stringToAdd);
+                });
+                window.scrollTo(0,document.body.scrollHeight);
+            });
+          
+        });
+    </script>
+</body>
