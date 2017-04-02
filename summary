@@ -11,10 +11,7 @@
   <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
   <link rel="icon" href="favicon.ico" type="image/x-icon">
 
-  <script>
-      applicationCache.swapCache();
-      
-  </script>
+  
 </head>
 
  <body data-gr-c-s-loaded="true"><div class="container">
@@ -27,27 +24,37 @@
         </nav>
         <h3 class="text-muted">Meat order</h3>
       </div>
-      <div class = "container">
+      <div class = "container" id = "checkout">
 
       </div>
 </div>
 
 <script>
      $(document).ready(function(){
-            var orders = [];
+            var orders = {};
+            var totalOrder = "";
             $.getJSON("data/orders.json",function(data){
                 $.each(data,function(key,val){
                     $.each(val,function(skey,sdata){
                         if(orders[skey] == null){
-                            orders[skey] = val;
+                            orders[skey] = sdata;
                         }
                         else{
-                            orders[skey] = (orders[skey]-0) + sdata;
+                            orders[skey] = parseInt(orders[skey]) + parseInt(sdata);
                         }
                     });
                 });
+                $.each(orders,function(meat,number){
+                    if(meat == "cost"||meat == "paid"){
+                        return true;
+                    }
+                    totalOrder += ("<p>" + meat + " : " + number + "</p>");
+                
             });
-            $.each(orders,function(meat,number){
-
-            });
+            $('#checkout').append(totalOrder);
+            $('#checkout').append("<h1>$" + orders["cost"]);
+        });
+            
+            
      });
+</script>
