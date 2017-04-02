@@ -37,21 +37,32 @@
         function saveChanges(){
             console.log("hello world");
         }
-        $.getJSON("code/orders.json",function(data){
-            $.each(data,function(key,val){
-                var stringToAdd = "<tr><td class = \"name\">";
-                var name = key;
-                stringToAdd += (name + "</td><td class = \"orders\">");
-                $.each(val,function(skey,sdata){
-                    console.log(skey);
-                    console.log(sdata);
-                    if(skey != "cost" && skey !="paid"){
-                        stringToAdd += ("<p>"+sKey+" :" + sdata+"</p>");
-                    }
-                    else if(skey == "cost" && sdata == 1){
-                        
-                    }
-                })
+        $(document).ready(function(){
+            $.getJSON("code/orders.json",function(data){
+                $.each(data,function(key,val){
+                    var stringToAdd = "<tr><td class = \"name\">";
+                    var name = key;
+                    stringToAdd += (name + "</td><td class = \"orders\">");
+                    $.each(val,function(skey,sdata){
+                        console.log(skey);
+                        console.log(sdata);
+                        if(skey != "cost" && skey !="paid"){
+                            stringToAdd += ("<p>"+skey+" :" + sdata+"</p>");
+                        }
+                        else if(skey == "cost"){
+                            stringToAdd +=("</td><td class = \"cost\"><p>$" + sdata + 
+                            "</td>")
+                        }
+                        else if(skey == "paid" && sdata == 1){
+                            stringToAdd+=("<td class = \"paid\"><p>Already Paid</p></td>");
+                        }
+                        else if(skey == "paid" && sdata == 0){
+                            stringToAdd+=("<td class = \"paid\"><label><input type = \"checkbox\" value = \"\" id = \"hasPaid\">Paid</label></td>");
+                        }
+
+                    });
+                    $('#orders>tbody').append(stringToAdd);
+                });
             });
         });
     </script>

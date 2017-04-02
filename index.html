@@ -164,9 +164,9 @@
       console.log(namexz + "herro");
       orderToSend[namexz] = order;
       
-      order["paid"] = 0;
       order["cost"] = totalCost;
-
+      order["paid"] = 0;
+      
      $.post("code/write.php", {pName : namexz, pOrder: order}, function(data){
        console.log(data);
      }); 
