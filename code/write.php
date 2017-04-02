@@ -3,7 +3,7 @@
     $order = $_POST['pOrder'];
     $name = $_POST['pName'];
     echo($name);
-    $file = 'orders.json';
+    $file = '../data/orders.json';
 
     $writeToJson = [];
     $writeToJson[$name] = $order;

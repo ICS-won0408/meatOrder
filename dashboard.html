@@ -15,7 +15,7 @@
         <h3 class="text-muted">Meat Orders</h3>
    </div>
 </div>
-    <button type="button" class="btn btn-primary" id="orderSubmit" onClick="saveChanges()">Save Changes</button>
+    <button type="button" class="btn btn-primary" id="orderSubmit">Save Changes</button>
 <div class="container" id = "orderContainer">
      <table id = "orders" class = "table table-bordered">
        <thead>
@@ -38,7 +38,8 @@
             console.log("hello world");
         }
         $(document).ready(function(){
-            $.getJSON("code/orders.json",function(data){
+            var nameOrder = [];
+            $.getJSON("data/orders.json",function(data){
                 $.each(data,function(key,val){
                     var stringToAdd = "<tr><td class = \"name\">";
                     
@@ -65,6 +66,21 @@
                     $('#orders>tbody').append(stringToAdd);
                 });
             });
+           $('#orderSubmit').click(function(){
+               
+            $('#orders tbody tr').each(function(index){
+                var name = $(this).find('.name').text();
+                
+                if($(this).find('#hasPaid').prop("checked") == true){
+                    nameOrder.push(name);
+                }
+            });
+            $.post("code/updatePaid.php",{names:nameOrder}, function(data){
+                console.log(data);
+            });
+            location.reload();
+            
+           }); 
         });
     </script>
 </body>
