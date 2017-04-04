@@ -31,3 +31,6 @@ div#confirmationPage{
 .nav{
   padding-top:10;
 }
+button#editOrder{
+  margin-left:10px;
+}
