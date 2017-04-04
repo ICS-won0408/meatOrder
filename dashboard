@@ -32,7 +32,7 @@
            <th>Name</th>
            <th>Items</th>
            <th>Cost</th>
-           <th>Paid</th>
+           <th>Options</th>
          </tr>
        </thead>
        <tbody>
@@ -48,6 +48,7 @@
         }
         $(document).ready(function(){
             var nameOrder = [];
+            var del = [];
             var random = parseInt(Math.random()*10000000);
             $.getJSON("data/orders.json?"+random,function(data){
                 $.each(data,function(key,val){
@@ -68,7 +69,7 @@
                             stringToAdd+=("<td class = \"paid\"><p>Already Paid</p></td>");
                         }
                         else if(skey == "paid" && sdata == 0){
-                            stringToAdd+=("<td class = \"paid\"><label><input type = \"checkbox\" value = \"\" id = \"hasPaid\">Paid</label></td>");
+                            stringToAdd+=("<td class = \"paid\"><label><input type = \"checkbox\" value = \"\" id = \"hasPaid\">Paid  </label><label><input type=\"checkbox\" value = \"\" id = \"delete\"> Delete</label></td>");
                         }
 
                     });
@@ -84,8 +85,11 @@
                 if($(this).find('#hasPaid').prop("checked") == true){
                     nameOrder.push(name);
                 }
+                else if($(this).find('#delete').prop("checked") == true){
+                    del.push(name);
+                }
             });
-            $.post("code/updatePaid.php",{names:nameOrder}, function(data){
+            $.post("code/updatePaid.php",{names:nameOrder, delete:del}, function(data){
                 console.log(data);
             });
             location.reload();

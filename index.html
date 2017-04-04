@@ -144,11 +144,12 @@
     $("form").submit(function() { return false; });
 });
    $("#submitOrder").click(function(){
-    
+     var namexz = document.getElementById('nameInput').value;
      $("#meats").css("display","none");
      $("#cost").css("display","none");
      $("#nameContainer").css("display","none");
      console.log("quoi");
+     $('#confirmationPage').append("<h1>Order for: " + namexz+"</h1>");
      $('#meat tbody tr').each(function(index){
        var numberOfOrders = $(this).find('#numOrder').val();
        var meat = $(this).find('.meatOrder').text();
@@ -167,7 +168,7 @@
       console.log(JSON.stringify(order));
 
       
-      var namexz = document.getElementById('nameInput').value;
+      namexz = document.getElementById('nameInput').value;
       console.log(namexz + "herro");
       orderToSend[namexz] = order;
       

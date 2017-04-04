@@ -1,6 +1,7 @@
 <?php
-    if(isset($_POST['names'])){
+    if(isset($_POST['names'])||isset($_POST['delete'])){
         $names = $_POST['names'];
+        $deleteNames = $_POST['delete'];
         $file = '../data/orders.json';
 
         $inp = file_get_contents($file);
@@ -10,6 +11,11 @@
         foreach($names as $value){
             if(isset($tempArray[$value]["paid"])){
                 $tempArray[$value]["paid"] = "1";
+            }
+        }
+        foreach($deleteNames as $value){
+            if(isset($tempArray[$value])){
+                unset($tempArray[$value]);
             }
         }
         var_dump($tempArray);
