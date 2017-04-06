@@ -45,10 +45,7 @@
 </div>
 
     <script>
-        function saveChanges(){
-            console.log("hello world");
-        }
-       
+        
         $(document).ready(function(){
             var nameOrder = [];
             var del = [];
@@ -59,8 +56,6 @@
                     
                     stringToAdd += (key + "</td><td class = \"orders\">");
                     $.each(val,function(skey,sdata){
-                        console.log(skey);
-                        console.log(sdata);
                         if(skey != "cost" && skey !="paid"){
                             stringToAdd += ("<p>"+skey+" :" + sdata+"</p>");
                         }
@@ -92,9 +87,7 @@
                     del.push(name);
                 }
             });
-            $.post("code/updatePaid.php",{names:nameOrder, delete:del}, function(data){
-                console.log(data);
-            });
+            $.post("code/updatePaid.php",{names:nameOrder, delete:del});
             location.reload();
             
            }); 
