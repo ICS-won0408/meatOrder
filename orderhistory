@@ -47,9 +47,7 @@
 </div>
 
     <script>
-        function saveChanges(){
-            console.log("hello world");
-        }
+        
         $(document).ready(function(){
             var nameOrder = [];
             var random = parseInt(Math.random()*10000000);
@@ -59,8 +57,7 @@
                     
                     stringToAdd += (key + "</td><td class = \"orders\">");
                     $.each(val,function(skey,sdata){
-                        console.log(skey);
-                        console.log(sdata);
+                        
                         if(skey != "cost" && skey !="paid"){
                             stringToAdd += ("<p>"+skey+" : " + sdata+"</p>");
                         }
