@@ -2,7 +2,11 @@ button#orderSubmit{
   position:fixed;
   right:2%;
 }
-
+button#deleteOrders{
+  position:fixed;
+  right:3%;
+  top:15%;
+}
 .nav{
   padding-top:10;
 }

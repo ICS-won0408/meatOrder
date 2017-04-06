@@ -1,5 +1,5 @@
 <?php
-    if(isset($_POST['names'])||isset($_POST['delete'])){
+    if(isset($_POST['names'])||isset($_POST['delete'])||isset($_POST['deleteAll'])){
         $names = $_POST['names'];
         $deleteNames = $_POST['delete'];
         $file = '../data/orders.json';
@@ -19,7 +19,7 @@
             }
         }
         var_dump($tempArray);
-        if(empty($tempArray)){
+        if(empty($tempArray)||$_POST['deleteAll']){
             unlink($file);
         }
         else{

@@ -25,6 +25,8 @@
       </div>
 </div>
     <button type="button" class="btn btn-primary" id="orderSubmit">Save Changes</button>
+    <button type="button" class="btn btn-danger" id="deleteOrders">Delete All</button> 
+
 <div class="container" id = "orderContainer">
      <table id = "orders" class = "table table-bordered">
        <thead>
@@ -46,6 +48,7 @@
         function saveChanges(){
             console.log("hello world");
         }
+       
         $(document).ready(function(){
             var nameOrder = [];
             var del = [];
@@ -95,6 +98,13 @@
             location.reload();
             
            }); 
+           $("#deleteOrders").click(function(){
+               var val = confirm("This will delete all orders");
+               if(val){
+                $.post("code/updatePaid.php",{deleteAll:true});
+                location.reload();
+               }
+           })
         });
     </script>
 </body>
