@@ -19,6 +19,10 @@
             }
         }
         var_dump($tempArray);
-        
+        if(empty($tempArray)){
+            unlink($file);
+        }
+        else{
         file_put_contents($file, json_encode($tempArray));
+        }
     }
