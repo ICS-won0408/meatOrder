@@ -7,6 +7,11 @@ button#deleteOrders{
   right:3%;
   top:15%;
 }
+button#changeMeats {
+  position: fixed;
+  right: 3%;
+  top: 24%;
+}
 .nav{
   padding-top:10;
 }
