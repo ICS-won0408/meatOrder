@@ -129,6 +129,7 @@
             });
 
             $("#addMoreMeat").click(function(){
+                console.log("hi");
                 var meat = $("#meat").val();
                 var cost = $("#meatCost").val();
                 $.post("code/addMeat.php",{
